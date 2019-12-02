@@ -1,4 +1,4 @@
-package javaTermProject;
+package javaTermProjectPackage;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;

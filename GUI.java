@@ -1,4 +1,4 @@
-package javaTermProject;
+package javaTermProjectPackage;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -14,22 +14,36 @@ public class GUI extends JFrame {
 	public static final int SCREEN_HEIGHT = 576;
 	private JScrollPane scrollPane;
 	private JTable table;
-	private Icon rename = new ImageIcon(Main.class.getResource("../image/intro_00001.png"));
-	private Icon goToList = new ImageIcon(Main.class.getResource("../image/back1.png"));
-	private JButton lastItem = new JButton(new ImageIcon(Main.class.getResource("../image/intro_00001.png")));
-	private JButton addList = new JButton(new ImageIcon(Main.class.getResource("../image/intro_00011.png")));
-	private JButton today = new JButton(new ImageIcon(Main.class.getResource("../image/intro_00021.png")));
-	private JButton bookMark = new JButton(new ImageIcon(Main.class.getResource("../image/intro_00031.png")));
-	private JButton addItem = new JButton(new ImageIcon(Main.class.getResource("../image/intro_00031.png")));
-	private JButton home = new JButton(new ImageIcon(Main.class.getResource("../image/intro_00001.png")));
+	private ImageIcon rename = new ImageIcon(GUI.class.getResource("../image/Comp 1_00003.png"));
+	private Icon goToList = new ImageIcon(GUI.class.getResource("../image/Comp 1_00002.png"));
+	private Icon addListEnter = new ImageIcon(GUI.class.getResource("../image/Comp 2_00008.png"));
+	private Icon addListExit = new ImageIcon(GUI.class.getResource("../image/Comp 2_00009.png"));
+	private JButton addList = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 2_00009.png")));
+	private Icon lastItemEnter = new ImageIcon(GUI.class.getResource("../image/Comp 2_00000.png"));
+	private Icon lastItemExit = new ImageIcon(GUI.class.getResource("../image/Comp 2_00001.png"));
+	private JButton lastItem = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 2_00001.png")));
+	private Icon todayEnter = new ImageIcon(GUI.class.getResource("../image/Comp 2_00002.png"));
+	private Icon todayExit = new ImageIcon(GUI.class.getResource("../image/Comp 2_00003.png"));
+	private JButton today = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 2_00003.png")));
+	private Icon bookMarkEnter = new ImageIcon(GUI.class.getResource("../image/Comp 1_00000.png"));
+	private Icon bookMarkExit = new ImageIcon(GUI.class.getResource("../image/Comp 1_00001.png"));
+	private JButton bookMark = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 1_00001.png")));
+	private Icon addItemEnter = new ImageIcon(GUI.class.getResource("../image/Comp 2_00004.png"));
+	private Icon addItemExit = new ImageIcon(GUI.class.getResource("../image/Comp 2_00005.png"));
+	private JButton addItem = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 2_00005.png")));
+	private Icon homeEnter = new ImageIcon(GUI.class.getResource("../image/Comp 1_00008.png"));
+	private Icon homeExit = new ImageIcon(GUI.class.getResource("../image/Comp 1_00009.png"));
+	private JButton home = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 1_00009.png")));
+	private Icon trashEnter = new ImageIcon(GUI.class.getResource("../image/Comp 1_00006.png"));
+	private Icon trashExit = new ImageIcon(GUI.class.getResource("../image/Comp 1_00007.png"));
+	private JButton trash = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 1_00007.png")));
+	private Icon trash2Enter = new ImageIcon(GUI.class.getResource("../image/Comp 1_00006.png"));
+	private Icon trash2Exit = new ImageIcon(GUI.class.getResource("../image/Comp 1_00007.png"));
+	private JButton trash2 = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 1_00007.png")));
 	private ArrayList<List> listAry;
 	private DefaultTableModel model;
 	private int listIdx;
 	
-
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -44,7 +58,7 @@ public class GUI extends JFrame {
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		setResizable(false);
 		setVisible(true);
-		// setLocationRelativeTo(null);
+		setLocationRelativeTo(null);
 		setLayout(null);
 		Start st = new Start();
 
@@ -131,18 +145,35 @@ public class GUI extends JFrame {
 		countryColumn.setCellEditor(new DefaultCellEditor(countryCombo));
 		*/
 		
-		lastItem.setBounds(50,20,100,50);
+		lastItem.setBounds(5,-10,200,100);
+		lastItem.setBorderPainted(false);
+		lastItem.setContentAreaFilled(false);
+		lastItem.setFocusPainted(false);
 		getContentPane().add(lastItem);
 		
-		addList.setBounds(450,20,100,50);
+		addList.setBounds(650,-10,200,100);
+		addList.setBorderPainted(false);
+		addList.setContentAreaFilled(false);
+		addList.setFocusPainted(false);
 		getContentPane().add(addList);
 		
-		today.setBounds(200,20,100,50);
+		today.setBounds(260,-10,200,100);
+		today.setBorderPainted(false);
+		today.setContentAreaFilled(false);
+		today.setFocusPainted(false);
 		getContentPane().add(today);
 		
-		bookMark.setBounds(330,20,100,50);
+		bookMark.setBounds(470,0,80,80);
+		bookMark.setBorderPainted(false);
+		bookMark.setContentAreaFilled(false);
+		bookMark.setFocusPainted(false);
 		getContentPane().add(bookMark);
 		
+		trash.setBounds(900,0,80,80);
+		trash.setBorderPainted(false);
+		trash.setContentAreaFilled(false);
+		trash.setFocusPainted(false);
+		getContentPane().add(trash);
 		
 		AddListListener addListListener = new AddListListener();
 		addList.addMouseListener(addListListener);
@@ -158,6 +189,10 @@ public class GUI extends JFrame {
 		
 		GoToListListener goToListListener = new GoToListListener();
 		table.addMouseListener(goToListListener);
+		
+		TrashListener trashListener = new TrashListener();
+		trash.addMouseListener(trashListener);
+		
 	}
 		
 	private class AddListListener extends JFrame implements MouseListener {
@@ -187,7 +222,7 @@ public class GUI extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					String nameData = tf1.getText();
 					ArrayList<Item> ary = new ArrayList<>();
-					Item i = new Item(nameData);
+					Item i = new Item("NullItemData");
 					ary.add(i);
 					List list = new List(nameData,ary);
 					listAry.add(list);
@@ -208,12 +243,12 @@ public class GUI extends JFrame {
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-		
+			addList.setIcon(addListEnter);
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-
+			addList.setIcon(addListExit);
 		}
 			
 	}
@@ -261,6 +296,7 @@ public class GUI extends JFrame {
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
+
 		}
 
 		@Override
@@ -282,6 +318,7 @@ public class GUI extends JFrame {
 			addList.setVisible(false);
 			today.setVisible(false);
 			bookMark.setVisible(false);
+			trash.setVisible(false);
 			addItem.setVisible(true);
 			home.setVisible(true);
 			listIdx = 1;
@@ -289,15 +326,16 @@ public class GUI extends JFrame {
 		}
 
 		@Override
-		public void mouseReleased(MouseEvent e) {
-		}
+		public void mouseReleased(MouseEvent e) {}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
+			today.setIcon(todayEnter);
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
+			today.setIcon(todayExit);
 		}
 		
 	}
@@ -315,6 +353,7 @@ public class GUI extends JFrame {
 			addList.setVisible(false);
 			today.setVisible(false);
 			bookMark.setVisible(false);
+			trash.setVisible(false);
 			addItem.setVisible(true);
 			home.setVisible(true);
 			listIdx = 0;
@@ -322,15 +361,16 @@ public class GUI extends JFrame {
 		}
 
 		@Override
-		public void mouseReleased(MouseEvent e) {
-		}
+		public void mouseReleased(MouseEvent e) {}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
+			bookMark.setIcon(bookMarkEnter);
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
+			bookMark.setIcon(bookMarkExit);
 		}
 		
 	}
@@ -351,6 +391,7 @@ public class GUI extends JFrame {
 				addList.setVisible(false);
 				today.setVisible(false);
 				bookMark.setVisible(false);
+				trash.setVisible(false);
 				addItem.setVisible(true);
 				home.setVisible(true);
 				listIdx = row + 2;
@@ -359,15 +400,75 @@ public class GUI extends JFrame {
 		}
 
 		@Override
-		public void mouseReleased(MouseEvent e) {
+		public void mouseReleased(MouseEvent e) {}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {}
+
+		@Override
+		public void mouseExited(MouseEvent e) {}
+		
+	}
+	
+	private class TrashListener extends JFrame implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			ArrayList<Integer> CheckBoxAry = new ArrayList<>();
+			for(int i = 0 ; i < listAry.size() - 2 ; i++) {
+				if ((boolean)table.getValueAt(i,3) == true) 
+					CheckBoxAry.add(i);
+			}
+			if(CheckBoxAry.size() > 0) {
+				JFrame f = new JFrame();
+				f.setTitle("Delete List");
+				f.setSize(300, 190);
+				f.setLocationRelativeTo(null);
+				f.setResizable(false);
+				f.setVisible(true);
+				f.setLayout(null);
+				JLabel la1 = new JLabel("삭제된 리스트는 복구가 불가능합니다.");
+				la1.setBounds(44,0,300,80);
+				f.add(la1);
+				JLabel la2 = new JLabel("삭제하시겠습니까?");
+				la2.setBounds(89,38,120,60);
+				f.add(la2);
+				JButton b = new JButton("확인");
+				b.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						int tmp = 2;
+						for(int i = 0 ; i < CheckBoxAry.size() ; i++) {
+							listAry.remove(CheckBoxAry.get(i) + tmp);	
+							tmp--; 
+						}
+						JOptionPane.showMessageDialog(null, "삭제되었습니다!");
+						f.setVisible(false);
+						table.setVisible(false);
+						scrollPane.setVisible(false);
+						UpdateTable();
+					}
+				});
+				b.setBounds(110,90,60,35);
+				f.add(b);	
+			} else JOptionPane.showMessageDialog(null, "체크박스를 선택하지 않았습니다!");
+			
 		}
 
 		@Override
+		public void mouseReleased(MouseEvent e) {}
+
+		@Override
 		public void mouseEntered(MouseEvent e) {
+			trash.setIcon(trashEnter);
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
+			trash.setIcon(trashExit);
 		}
 		
 	}
@@ -426,11 +527,23 @@ public class GUI extends JFrame {
 			model.setValueAt(false, i, 3);
 		}
 		
-		addItem.setBounds(450,20,100,50);
+		addItem.setBounds(600,-10,200,100);
+		addItem.setBorderPainted(false);
+		addItem.setContentAreaFilled(false);
+		addItem.setFocusPainted(false);
 		getContentPane().add(addItem);
 		
-		home.setBounds(800,20,100,50);
+		home.setBounds(800,0,80,80);
+		home.setBorderPainted(false);
+		home.setContentAreaFilled(false);
+		home.setFocusPainted(false);
 		getContentPane().add(home);
+		
+		trash2.setBounds(900,0,80,80);
+		trash2.setBorderPainted(false);
+		trash2.setContentAreaFilled(false);
+		trash2.setFocusPainted(false);
+		getContentPane().add(trash2);
 		
 		AddItemListener addItemListener = new AddItemListener();
 		addItem.addMouseListener(addItemListener);
@@ -440,6 +553,9 @@ public class GUI extends JFrame {
 		
 		HomeListener homeListener = new HomeListener();
 		home.addMouseListener(homeListener);
+		
+		Trash2Listener trash2Listener = new Trash2Listener();
+		trash2.addMouseListener(trash2Listener);
 	}
 	
 	private class AddItemListener extends JFrame implements MouseListener {
@@ -503,10 +619,12 @@ public class GUI extends JFrame {
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
+			addItem.setIcon(addItemEnter);
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
+			addItem.setIcon(addItemExit);
 		}
 	}
 
@@ -567,12 +685,10 @@ public class GUI extends JFrame {
 		public void mouseReleased(MouseEvent e) {}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {
-		}
+		public void mouseEntered(MouseEvent e) {}
 
 		@Override
-		public void mouseExited(MouseEvent e) {
-		}
+		public void mouseExited(MouseEvent e) {}
 	}
 
 	private class HomeListener implements MouseListener {
@@ -598,11 +714,184 @@ public class GUI extends JFrame {
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
+			home.setIcon(homeEnter);
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
+			home.setIcon(homeExit);
 		}
 		
+	}
+	
+	private class Trash2Listener extends JFrame implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			ArrayList<Integer> CheckBoxAry = new ArrayList<>();
+			for(int i = 0 ; i < listAry.get(listIdx).ary.size() - 1 ; i++) {
+				if ((boolean)table.getValueAt(i,3) == true) 
+					CheckBoxAry.add(i);
+			}
+			if(CheckBoxAry.size() > 0) {
+				JFrame f = new JFrame();
+				f.setTitle("Delete Item");
+				f.setSize(300, 190);
+				f.setLocationRelativeTo(null);
+				f.setResizable(false);
+				f.setVisible(true);
+				f.setLayout(null);
+				JLabel la1 = new JLabel("삭제된 아이템은 복구가 불가능합니다.");
+				la1.setBounds(44,0,300,80);
+				f.add(la1);
+				JLabel la2 = new JLabel("삭제하시겠습니까?");
+				la2.setBounds(89,38,120,60);
+				f.add(la2);
+				JButton b = new JButton("확인");
+				b.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						int tmp = 1;
+						for(int i = 0 ; i < CheckBoxAry.size() ; i++) {
+							listAry.get(listIdx).ary.remove(CheckBoxAry.get(i) + tmp);	
+							tmp--; 
+						}
+						JOptionPane.showMessageDialog(null, "삭제되었습니다!");
+						f.setVisible(false);
+						table.setVisible(false);
+						scrollPane.setVisible(false);
+						UpdateTable2();
+					}
+				});
+				b.setBounds(110,90,60,35);
+				f.add(b);	
+			} else JOptionPane.showMessageDialog(null, "체크박스를 선택하지 않았습니다!");
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			trash2.setIcon(trash2Enter);
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			trash2.setIcon(trash2Exit);
+		}
+	}
+	
+	public void UpdateTable() {
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 80, 1013, 461);
+		getContentPane().add(scrollPane);
+
+		// Table
+		table = new JTable();
+		// table.setShowHorizontalLines(false);
+		// table.setShowVerticalLines(false);
+		table.setRowHeight(80);
+		scrollPane.setViewportView(table);
+		Font font = new Font("Godic", Font.BOLD, 20);
+		table.setFont(font);
+
+		// Model for Table
+		model = new DefaultTableModel() {
+
+			public Class<?> getColumnClass(int column) {
+				switch (column) {
+				case 0:
+					return String.class;
+				case 1:
+					return Icon.class;
+				case 2:
+					return Icon.class;
+				case 3:
+					return Boolean.class;
+				default:
+					return String.class;
+				}
+			}
+		};
+		
+		table.setModel(model);
+
+		model.addColumn("List Name");
+		model.addColumn("Go to List");
+		model.addColumn("Modify Name");
+		model.addColumn("Select");
+
+		table.getColumnModel().getColumn(0).setPreferredWidth(900);
+		table.getColumnModel().getColumn(1).setPreferredWidth(100);
+		table.getColumnModel().getColumn(2).setPreferredWidth(100);
+		table.getColumnModel().getColumn(3).setPreferredWidth(100);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+
+		// Data Row
+		for (int i = 0; i < listAry.size() - 2; i++) {
+			model.addRow(new Object[0]);
+			model.setValueAt("      " + listAry.get(i + 2).name, i, 0);
+			model.setValueAt(goToList, i, 1);
+			model.setValueAt(rename, i, 2);
+			model.setValueAt(false, i, 3);
+		}
+	}
+	
+	public void UpdateTable2() {
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 80, 1013, 461);
+		getContentPane().add(scrollPane);
+
+		// Table
+		table = new JTable();
+		table.setRowHeight(80);
+		scrollPane.setViewportView(table);
+		Font font = new Font("Godic", Font.BOLD, 20);
+		table.setFont(font);
+
+		// Model for Table
+		model = new DefaultTableModel() {
+
+			public Class<?> getColumnClass(int column) {
+				switch (column) {
+				case 0:
+					return String.class;
+				case 1:
+					return String.class;
+				case 2:
+					return Icon.class;
+				case 3:
+					return Boolean.class;
+				default:
+					return String.class;
+				}
+			}
+		};
+		table.setModel(model);
+
+		model.addColumn("Item Name");
+		model.addColumn("QTY");
+		model.addColumn("Modify Data");
+		model.addColumn("Select");
+		
+		table.getColumnModel().getColumn(0).setPreferredWidth(800);
+		table.getColumnModel().getColumn(1).setPreferredWidth(200);
+		table.getColumnModel().getColumn(2).setPreferredWidth(100);
+		table.getColumnModel().getColumn(3).setPreferredWidth(100);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+
+		// Data Row
+		for (int i = 0; i < listAry.get(listIdx).ary.size() - 1; i++) {
+			model.addRow(new Object[0]);
+			model.setValueAt("      " + listAry.get(listIdx).ary.get(i+1).name, i, 0);
+			model.setValueAt("    " + listAry.get(listIdx).ary.get(i+1).num, i, 1);
+			model.setValueAt(rename, i, 2);
+			model.setValueAt(false, i, 3);
+		}
 	}
 }

@@ -1,4 +1,4 @@
-package javaTermProject;
+package javaTermProjectPackage;
 import java.io.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -20,15 +20,25 @@ public class FileIO {
 		}
 	}
 	//파일을 쓰는 함수입니다.(한 아이템)
-	public void InputItem(String filename, Item item) throws IOException {
+	public void Input2(String filename, Item item) throws IOException {
 		File fn  = new File(filename);
 		try {
-			FileWriter fw = new FileWriter(fn);
+			FileWriter fw = new FileWriter(fn,true);
 			Writer output = new BufferedWriter(fw);
-			output.write(item.toString() + "\n");
+			for(int i = 0 ; i < item.toString().length() ; i++) {
+				String str = item.toString();
+				output.append(str.charAt(i));
+			}
+			output.append('\n');
 			output.close();
-		} catch (Exception e) {
-			System.out.println(e);
+		} catch (Exception e1) {
+			try {
+				FileWriter fw = new FileWriter(fn);
+				Writer output = new BufferedWriter(fw);
+				output.write(item.toString());
+			} catch (Exception e2) {
+				System.err.println(e2);
+			}
 		}
 	}
 	

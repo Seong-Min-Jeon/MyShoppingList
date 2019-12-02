@@ -1,4 +1,4 @@
-package javaTermProject;
+package javaTermProjectPackage;
 
 public class Item {
 	String name; //항목의 이름

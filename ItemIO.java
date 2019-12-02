@@ -1,4 +1,4 @@
-package javaTermProject;
+package javaTermProjectPackage;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 // Item을 input output하는 클래스입니다. Minimum Functions 1
@@ -19,7 +19,7 @@ public class ItemIO {
 		
 		FileIO fileIO = new FileIO();
 		try {
-			fileIO.InputItem("Past List.txt",item);
+			fileIO.Input2("Past List.txt",item);
 		} catch (Exception E) {
 			JOptionPane.showMessageDialog(null, "Can't create files.");
 		}

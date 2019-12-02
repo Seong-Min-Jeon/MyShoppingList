@@ -1,4 +1,4 @@
-package javaTermProject;
+package javaTermProjectPackage;
 import java.io.IOException;
 import java.util.ArrayList;
 
