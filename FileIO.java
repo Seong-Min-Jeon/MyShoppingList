@@ -31,6 +31,45 @@ public class FileIO {
 			System.out.println(e);
 		}
 	}
+	
+	/*
+	//파일을 읽는 함수입니다.
+	public ArrayList<Item> Output(String filename, ArrayList<Item> ary) throws IOException {
+		String line;
+		try {
+			BufferedReader input = new BufferedReader(new FileReader(filename));
+			if (!input.ready()) 
+				throw new IOException();
+			while ((line = input.readLine()) != null) {
+	            String name =  line.split("\\(")[0];
+	            String remainder = line.split("\\(")[1];
+	            String num = remainder.split("\\)")[0];
+	            Item i = new Item(name, Integer.parseInt(num));
+	            ary.add(i);
+			}
+			input.close();
+		} catch (Exception e) {
+			File fn  = new File("Meta List.txt");
+		}
+		return ary;
+	}
+	//파일을 읽는 함수입니다. (Meta List)
+	public ArrayList<String> OutputMeta(String filename, ArrayList<String> ary) throws IOException {
+		String line;
+		try {
+			BufferedReader input = new BufferedReader(new FileReader(filename));
+			if (!input.ready()) 
+				throw new IOException();
+			while ((line = input.readLine()) != null) {	            
+	            ary.add(line);
+			}
+			input.close();
+		} catch (Exception e) {
+			File fn  = new File("Meta List.txt");
+		}
+		return ary;
+	}
+	*/
 	//파일을 읽는 함수입니다.(이전 등록 목록)
 	public ArrayList<Item> Output(String filename) throws IOException {
 		String line;
@@ -53,8 +92,8 @@ public class FileIO {
 		return ary;
 	}
 	
-	//파일을 읽는 함수입니다. (전체 리스트)
-	public ArrayList<List> OutputFinal(String filename, ArrayList<List> ary) throws IOException {
+	//파일을 읽는 함수입니다.(전체 리스트)
+	public ArrayList<List> OutputFinal(String filename) throws IOException {
 		String line;
 		ArrayList<List> ary = new ArrayList<>();
 		try {
@@ -82,8 +121,15 @@ public class FileIO {
 		} catch (Exception e) {
 			File fn  = new File("List.txt");
 			ArrayList<Item> a = new ArrayList<>();
+			ArrayList<Item> b = new ArrayList<>();
+			Item i = new Item("Book Mark");
+			Item i2 = new Item("TodayList");
+			a.add(i);
+			b.add(i2);
 			List l1 = new List("Book Mark", a);
+			List l2 = new List("Today List", b);
 			ary.add(l1);
+			ary.add(l2);
 		}
 		return ary;
 	}
