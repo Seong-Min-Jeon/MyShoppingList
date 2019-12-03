@@ -6,6 +6,7 @@ public class ItemIO {
 	boolean b = true;
 	
 	public void InputItem(Item item, ArrayList<Item> ary) { //Item을 input하는 method입니다.
+		/*
 		for(int i = 0 ; i < ary.size() ; i++) {
 			String name = ary.get(i).name;
 			if(name.equals(item.name)) {
@@ -16,6 +17,8 @@ public class ItemIO {
 		}
 		if(b == true)
 			ary.add(item);
+		*/
+		ary.add(item);
 		
 		FileIO fileIO = new FileIO();
 		try {

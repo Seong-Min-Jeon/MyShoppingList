@@ -20,9 +20,9 @@ public class GUI extends JFrame {
 	private Icon addListEnter = new ImageIcon(GUI.class.getResource("../image/Comp 2_00008.png"));
 	private Icon addListExit = new ImageIcon(GUI.class.getResource("../image/Comp 2_00009.png"));
 	private JButton addList = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 2_00009.png")));
-	private Icon lastItemEnter = new ImageIcon(GUI.class.getResource("../image/Comp 2_00000.png"));
-	private Icon lastItemExit = new ImageIcon(GUI.class.getResource("../image/Comp 2_00001.png"));
-	private JButton lastItem = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 2_00001.png")));
+	private Icon pastItemEnter = new ImageIcon(GUI.class.getResource("../image/Comp 2_00000.png"));
+	private Icon pastItemExit = new ImageIcon(GUI.class.getResource("../image/Comp 2_00001.png"));
+	private JButton pastItem = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 2_00001.png")));
 	private Icon todayEnter = new ImageIcon(GUI.class.getResource("../image/Comp 2_00002.png"));
 	private Icon todayExit = new ImageIcon(GUI.class.getResource("../image/Comp 2_00003.png"));
 	private JButton today = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 2_00003.png")));
@@ -50,13 +50,18 @@ public class GUI extends JFrame {
 	private Icon moveEnter = new ImageIcon(GUI.class.getResource("../image/Comp 4_00000.png"));
 	private Icon moveExit = new ImageIcon(GUI.class.getResource("../image/Comp 4_00001.png"));
 	private JButton move = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 4_00001.png")));
+	private Icon home2Enter = new ImageIcon(GUI.class.getResource("../image/Comp 1_00008.png"));
+	private Icon home2Exit = new ImageIcon(GUI.class.getResource("../image/Comp 1_00009.png"));
+	private JButton home2 = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 1_00009.png")));
 	private ArrayList<List> listAry;
+	private ArrayList<Item> listAry2;
 	private DefaultTableModel model;
 	private int listIdx;
 	private int listIdx2;
 	private String listNameField;
 	private Container c1;
 	private Container c2;
+	private Container c3;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -82,7 +87,6 @@ public class GUI extends JFrame {
 		Start st = new Start();
 
 		listAry = st.getList();
-		System.out.println(listAry);
 
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -107,6 +111,9 @@ public class GUI extends JFrame {
 		
 		TrashListener trashListener = new TrashListener();
 		trash.addMouseListener(trashListener);
+		
+		PastItemListener pastItemListener = new PastItemListener();
+		pastItem.addMouseListener(pastItemListener);
 		//d2
 		AddItemListener addItemListener = new AddItemListener();
 		addItem.addMouseListener(addItemListener);
@@ -119,11 +126,19 @@ public class GUI extends JFrame {
 		
 		MoveListener moveListener = new MoveListener();
 		move.addMouseListener(moveListener);
+		
+		DupListener dupListener = new DupListener();
+		dup.addMouseListener(dupListener);
+		//d3
+		Home2Listener home2Listener = new Home2Listener();
+		home2.addMouseListener(home2Listener);
 
 		d1(listAry);
 	}
 	
-	public void d1(ArrayList<List> listAry) {		
+	public void d1(ArrayList<List> listAry) {
+		setTitle("Main");
+		
 		c1 = getContentPane();
 		c1.setLayout(null);
 		
@@ -181,11 +196,11 @@ public class GUI extends JFrame {
 			model.setValueAt(false, i, 3);
 		}
 		
-		lastItem.setBounds(5,-10,200,100);
-		lastItem.setBorderPainted(false);
-		lastItem.setContentAreaFilled(false);
-		lastItem.setFocusPainted(false);
-		c1.add(lastItem);
+		pastItem.setBounds(5,-10,200,100);
+		pastItem.setBorderPainted(false);
+		pastItem.setContentAreaFilled(false);
+		pastItem.setFocusPainted(false);
+		c1.add(pastItem);
 		
 		addList.setBounds(650,-10,200,100);
 		addList.setBorderPainted(false);
@@ -244,18 +259,27 @@ public class GUI extends JFrame {
 			b.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					boolean no = false;
 					String nameData = tf1.getText();
-					ArrayList<Item> ary = new ArrayList<>();
-					Item i = new Item("NullItemData");
-					ary.add(i);
-					List list = new List(nameData,ary);
-					listAry.add(list);
-					model.addRow(new Object[0]);
-					model.setValueAt("      " + listAry.get(listAry.size() - 1).name, listAry.size() - 3, 0);
-					model.setValueAt(goToList, listAry.size() - 3, 1);
-					model.setValueAt(rename, listAry.size() - 3, 2);
-					model.setValueAt(false, listAry.size() - 3, 3);
-					f.setVisible(false);
+					for(int i = 0 ; i < listAry.size() ; i++) {
+						String preName = listAry.get(i).name;
+						if(nameData.equals(preName)) {
+							no = true;
+						}
+					}
+					if(no == false) {
+						ArrayList<Item> ary = new ArrayList<>();
+						Item i = new Item("NullItemData");
+						ary.add(i);
+						List list = new List(nameData,ary);
+						listAry.add(list);
+						model.addRow(new Object[0]);
+						model.setValueAt("      " + listAry.get(listAry.size() - 1).name, listAry.size() - 3, 0);
+						model.setValueAt(goToList, listAry.size() - 3, 1);
+						model.setValueAt(rename, listAry.size() - 3, 2);
+						model.setValueAt(false, listAry.size() - 3, 3);
+						f.setVisible(false);
+					} else JOptionPane.showMessageDialog(null, "같은 이름의 리스트가 이미 존재합니다!");
 				}
 			});
 			b.setBounds(110,90,60,35);
@@ -336,7 +360,7 @@ public class GUI extends JFrame {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			lastItem.setVisible(false);
+			pastItem.setVisible(false);
 			scrollPane.setVisible(false);
 			table.setVisible(false);
 			addList.setVisible(false);
@@ -375,7 +399,7 @@ public class GUI extends JFrame {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			lastItem.setVisible(false);
+			pastItem.setVisible(false);
 			scrollPane.setVisible(false);
 			table.setVisible(false);
 			addList.setVisible(false);
@@ -417,7 +441,7 @@ public class GUI extends JFrame {
 			int row = table.getSelectedRow();
 			int column = table.getSelectedColumn();
 			if (column == 1) {
-				lastItem.setVisible(false);
+				pastItem.setVisible(false);
 				scrollPane.setVisible(false);
 				table.setVisible(false);
 				addList.setVisible(false);
@@ -509,9 +533,45 @@ public class GUI extends JFrame {
 		
 	}
 	
+	private class PastItemListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			pastItem.setVisible(false);
+			scrollPane.setVisible(false);
+			table.setVisible(false);
+			addList.setVisible(false);
+			today.setVisible(false);
+			bookMark.setVisible(false);
+			trash.setVisible(false);
+			home2.setVisible(true);
+			d3();
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			pastItem.setIcon(pastItemEnter);
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			pastItem.setIcon(pastItemExit);
+		}
+		
+	}
+	
 	public void d2(int row) {
+		setTitle(listAry.get(listIdx).name);
+		
 		c2 = getContentPane();
 		c2.setLayout(null);
+		
 		// ScrollPane for Table
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 80, 1013, 461);
@@ -754,7 +814,7 @@ public class GUI extends JFrame {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			lastItem.setVisible(true);
+			pastItem.setVisible(true);
 			addList.setVisible(true);
 			today.setVisible(true);
 			bookMark.setVisible(true);
@@ -886,7 +946,6 @@ public class GUI extends JFrame {
 						for(int i = 0 ; i < listAry.size() ; i++) {
 							if (listNameField.equals(listAry.get(i).name)) {
 								listIdx2 = i;
-								System.out.println(listIdx2);
 							}
 						}
 					}
@@ -896,8 +955,8 @@ public class GUI extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						int tmp = 1;
+						MoveItem moveItem = new MoveItem();
 						for(int i = 0 ; i < CheckBoxAry.size() ; i++) {
-							MoveItem moveItem = new MoveItem();
 							moveItem.Move(listAry.get(listIdx).ary.get(CheckBoxAry.get(i) + tmp), listAry.get(listIdx).ary, listAry.get(listIdx2).ary);
 							tmp--;
 						}
@@ -923,6 +982,171 @@ public class GUI extends JFrame {
 		@Override
 		public void mouseExited(MouseEvent e) {
 			move.setIcon(moveExit);
+		}
+		
+	}
+	
+	private class DupListener extends JFrame implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			ArrayList<Integer> CheckBoxAry = new ArrayList<>();
+			for(int i = 0 ; i < listAry.get(listIdx).ary.size() - 1 ; i++) {
+				if ((boolean)table.getValueAt(i,3) == true) 
+					CheckBoxAry.add(i);
+			}
+			if(CheckBoxAry.size() > 0) {
+				JFrame f = new JFrame();
+				f.setTitle("Move Item");
+				f.setSize(300, 190);
+				f.setLocationRelativeTo(null);
+				f.setResizable(false);
+				f.setVisible(true);
+				f.setLayout(null);
+				String[] listName = new String[listAry.size()];
+				for(int i = 0 ; i < listAry.size() ; i++)
+					listName[i] = listAry.get(i).name;
+				JComboBox cBox = new JComboBox(listName);
+				cBox.setBounds(40, 30, 204, 20);
+				f.add(cBox);
+				cBox.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						JComboBox cb = (JComboBox)e.getSource();							
+						listNameField = (String)cb.getSelectedItem();
+						for(int i = 0 ; i < listAry.size() ; i++) {
+							if (listNameField.equals(listAry.get(i).name)) {
+								listIdx2 = i;
+							}
+						}
+					}
+				});
+				JButton b = new JButton("확인");
+				b.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						for(int i = 0 ; i < CheckBoxAry.size() ; i++) {
+							MoveItem moveItem = new MoveItem();
+							moveItem.Dup(listAry.get(listIdx).ary.get(CheckBoxAry.get(i) + 1), listAry.get(listIdx2).ary);
+						}
+						f.setVisible(false);
+						table.setVisible(false);
+						scrollPane.setVisible(false);
+						UpdateTable2();
+					}
+				});
+				b.setBounds(110,90,60,35);
+				f.add(b);	
+			} else JOptionPane.showMessageDialog(null, "체크박스를 선택하지 않았습니다!");
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			dup.setIcon(dupEnter);
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			dup.setIcon(dupExit);
+		}
+		
+	}
+	
+	public void d3() {
+		setTitle("이전 등록 아이템");
+		
+		LoadPastItem load = new LoadPastItem();
+		listAry2 = load.getList();
+		System.out.println(listAry2);
+		
+		c3 = getContentPane();
+		c3.setLayout(null);
+		
+		// ScrollPane for Table
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 80, 1013, 461);
+		c3.add(scrollPane);
+
+		// Table
+		table = new JTable();
+		table.setRowHeight(30);
+		scrollPane.setViewportView(table);
+		Font font = new Font("Godic", Font.BOLD, 17);
+		table.setFont(font);
+
+		// Model for Table
+		model = new DefaultTableModel() {
+
+			public Class<?> getColumnClass(int column) {
+				switch (column) {
+				case 0:
+					return String.class;
+				case 1:
+					return String.class;
+				default:
+					return String.class;
+				}
+			}
+		};
+		table.setModel(model);
+
+		model.addColumn("Item Name");
+		model.addColumn("QTY");
+		
+		table.getColumnModel().getColumn(0).setPreferredWidth(800);
+		table.getColumnModel().getColumn(1).setPreferredWidth(200);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+
+		// Data Row
+		for (int i = 0; i < listAry2.size(); i++) {
+			model.addRow(new Object[0]);
+			model.setValueAt("     " + listAry2.get(i).name, i, 0);
+			model.setValueAt("    " + listAry2.get(i).num, i, 1);
+		}
+		
+		home2.setBounds(800,0,80,80);
+		home2.setBorderPainted(false);
+		home2.setContentAreaFilled(false);
+		home2.setFocusPainted(false);
+		c3.add(home2);
+	}
+	
+	private class Home2Listener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			pastItem.setVisible(true);
+			addList.setVisible(true);
+			today.setVisible(true);
+			bookMark.setVisible(true);
+			trash.setVisible(true);
+			c1.setEnabled(true);
+			scrollPane.setVisible(false);
+			table.setVisible(false);
+			home2.setVisible(false);
+			d1(listAry);
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			home2.setIcon(home2Enter);
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			home2.setIcon(home2Exit);
 		}
 		
 	}
