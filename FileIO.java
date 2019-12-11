@@ -16,7 +16,7 @@ public class FileIO {
 			}
 			output.close();
 		} catch (Exception e) {
-			System.out.println(e);
+			System.err.println(e);
 		}
 	}
 	//파일을 쓰는 함수입니다.(한 아이템)
@@ -25,11 +25,7 @@ public class FileIO {
 		try {
 			FileWriter fw = new FileWriter(fn,true);
 			Writer output = new BufferedWriter(fw);
-			for(int i = 0 ; i < item.toString().length() ; i++) {
-				String str = item.toString();
-				output.append(str.charAt(i));
-			}
-			output.append('\n');
+			output.write(item.toString() + "\n");
 			output.close();
 		} catch (Exception e1) {
 			try {
@@ -41,45 +37,6 @@ public class FileIO {
 			}
 		}
 	}
-	
-	/*
-	//파일을 읽는 함수입니다.
-	public ArrayList<Item> Output(String filename, ArrayList<Item> ary) throws IOException {
-		String line;
-		try {
-			BufferedReader input = new BufferedReader(new FileReader(filename));
-			if (!input.ready()) 
-				throw new IOException();
-			while ((line = input.readLine()) != null) {
-	            String name =  line.split("\\(")[0];
-	            String remainder = line.split("\\(")[1];
-	            String num = remainder.split("\\)")[0];
-	            Item i = new Item(name, Integer.parseInt(num));
-	            ary.add(i);
-			}
-			input.close();
-		} catch (Exception e) {
-			File fn  = new File("Meta List.txt");
-		}
-		return ary;
-	}
-	//파일을 읽는 함수입니다. (Meta List)
-	public ArrayList<String> OutputMeta(String filename, ArrayList<String> ary) throws IOException {
-		String line;
-		try {
-			BufferedReader input = new BufferedReader(new FileReader(filename));
-			if (!input.ready()) 
-				throw new IOException();
-			while ((line = input.readLine()) != null) {	            
-	            ary.add(line);
-			}
-			input.close();
-		} catch (Exception e) {
-			File fn  = new File("Meta List.txt");
-		}
-		return ary;
-	}
-	*/
 	//파일을 읽는 함수입니다.(이전 등록 목록)
 	public ArrayList<Item> Output(String filename) throws IOException {
 		String line;
@@ -97,11 +54,10 @@ public class FileIO {
 			}
 			input.close();
 		} catch (Exception e) {
-			File fn  = new File("Past List.txt");
+			File fn  = new File("Last List.txt");
 		}
 		return ary;
 	}
-	
 	//파일을 읽는 함수입니다.(전체 리스트)
 	public ArrayList<List> OutputFinal(String filename) throws IOException {
 		String line;

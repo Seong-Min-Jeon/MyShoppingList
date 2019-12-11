@@ -2,13 +2,13 @@ package javaTermProjectPackage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class LoadPastItem {
+public class LoadLastItem {
 	ArrayList<Item> ListAry = new ArrayList<>();
 
-	public LoadPastItem() {
+	public LoadLastItem() {
 		FileIO fileIO = new FileIO();
 		try {
-			ArrayList<Item> ListAry = fileIO.Output("Past List.txt");
+			ArrayList<Item> ListAry = fileIO.Output("Last List.txt");
 			this.ListAry = ListAry;
 		} catch (Exception e) {
 			System.out.println(e);

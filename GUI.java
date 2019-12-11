@@ -2,12 +2,14 @@ package javaTermProjectPackage;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.*;
-
+import java.io.*;
 
 public class GUI extends JFrame {
 	
@@ -15,44 +17,45 @@ public class GUI extends JFrame {
 	public static final int SCREEN_HEIGHT = 576;
 	private JScrollPane scrollPane;
 	private JTable table;
-	private ImageIcon rename = new ImageIcon(GUI.class.getResource("../image/Comp 1_00003.png"));
-	private Icon goToList = new ImageIcon(GUI.class.getResource("../image/Comp 1_00002.png"));
-	private Icon addListEnter = new ImageIcon(GUI.class.getResource("../image/Comp 2_00008.png"));
-	private Icon addListExit = new ImageIcon(GUI.class.getResource("../image/Comp 2_00009.png"));
-	private JButton addList = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 2_00009.png")));
-	private Icon pastItemEnter = new ImageIcon(GUI.class.getResource("../image/Comp 2_00000.png"));
-	private Icon pastItemExit = new ImageIcon(GUI.class.getResource("../image/Comp 2_00001.png"));
-	private JButton pastItem = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 2_00001.png")));
-	private Icon todayEnter = new ImageIcon(GUI.class.getResource("../image/Comp 2_00002.png"));
-	private Icon todayExit = new ImageIcon(GUI.class.getResource("../image/Comp 2_00003.png"));
-	private JButton today = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 2_00003.png")));
-	private Icon bookMarkEnter = new ImageIcon(GUI.class.getResource("../image/Comp 1_00000.png"));
-	private Icon bookMarkExit = new ImageIcon(GUI.class.getResource("../image/Comp 1_00001.png"));
-	private JButton bookMark = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 1_00001.png")));
-	private Icon addItemEnter = new ImageIcon(GUI.class.getResource("../image/Comp 2_00004.png"));
-	private Icon addItemExit = new ImageIcon(GUI.class.getResource("../image/Comp 2_00005.png"));
-	private JButton addItem = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 2_00005.png")));
-	private Icon homeEnter = new ImageIcon(GUI.class.getResource("../image/Comp 1_00008.png"));
-	private Icon homeExit = new ImageIcon(GUI.class.getResource("../image/Comp 1_00009.png"));
-	private JButton home = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 1_00009.png")));
-	private Icon trashEnter = new ImageIcon(GUI.class.getResource("../image/Comp 1_00006.png"));
-	private Icon trashExit = new ImageIcon(GUI.class.getResource("../image/Comp 1_00007.png"));
-	private JButton trash = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 1_00007.png")));
-	private Icon trash2Enter = new ImageIcon(GUI.class.getResource("../image/Comp 1_00006.png"));
-	private Icon trash2Exit = new ImageIcon(GUI.class.getResource("../image/Comp 1_00007.png"));
-	private JButton trash2 = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 1_00007.png")));
-	private Icon printEnter = new ImageIcon(GUI.class.getResource("../image/Comp 1_00004.png"));
-	private Icon printExit = new ImageIcon(GUI.class.getResource("../image/Comp 1_00005.png"));
-	private JButton print = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 1_00005.png")));
-	private Icon dupEnter = new ImageIcon(GUI.class.getResource("../image/Comp 2_00006.png"));
-	private Icon dupExit = new ImageIcon(GUI.class.getResource("../image/Comp 2_00007.png"));
-	private JButton dup = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 2_00007.png")));
-	private Icon moveEnter = new ImageIcon(GUI.class.getResource("../image/Comp 4_00000.png"));
-	private Icon moveExit = new ImageIcon(GUI.class.getResource("../image/Comp 4_00001.png"));
-	private JButton move = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 4_00001.png")));
-	private Icon home2Enter = new ImageIcon(GUI.class.getResource("../image/Comp 1_00008.png"));
-	private Icon home2Exit = new ImageIcon(GUI.class.getResource("../image/Comp 1_00009.png"));
-	private JButton home2 = new JButton(new ImageIcon(GUI.class.getResource("../image/Comp 1_00009.png")));
+	private ImageIcon rename = new ImageIcon(GUI.class.getResource("/image/Comp 1_00003.png"));
+	private Icon goToList = new ImageIcon(GUI.class.getResource("/image/Comp 1_00002.png"));
+	private Icon addListEnter = new ImageIcon(GUI.class.getResource("/image/Comp 2_00008.png"));
+	private Icon addListExit = new ImageIcon(GUI.class.getResource("/image/Comp 2_00009.png"));
+	private JButton addList = new JButton(new ImageIcon(GUI.class.getResource("/image/Comp 2_00009.png")));
+	private Icon pastItemEnter = new ImageIcon(GUI.class.getResource("/image/Comp 2_00000.png"));
+	private Icon pastItemExit = new ImageIcon(GUI.class.getResource("/image/Comp 2_00001.png"));
+	private JButton pastItem = new JButton(new ImageIcon(GUI.class.getResource("/image/Comp 2_00001.png")));
+	private Icon todayEnter = new ImageIcon(GUI.class.getResource("/image/Comp 2_00002.png"));
+	private Icon todayExit = new ImageIcon(GUI.class.getResource("/image/Comp 2_00003.png"));
+	private JButton today = new JButton(new ImageIcon(GUI.class.getResource("/image/Comp 2_00003.png")));
+	private Icon bookMarkEnter = new ImageIcon(GUI.class.getResource("/image/Comp 1_00000.png"));
+	private Icon bookMarkExit = new ImageIcon(GUI.class.getResource("/image/Comp 1_00001.png"));
+	private JButton bookMark = new JButton(new ImageIcon(GUI.class.getResource("/image/Comp 1_00001.png")));
+	private Icon addItemEnter = new ImageIcon(GUI.class.getResource("/image/Comp 2_00004.png"));
+	private Icon addItemExit = new ImageIcon(GUI.class.getResource("/image/Comp 2_00005.png"));
+	private JButton addItem = new JButton(new ImageIcon(GUI.class.getResource("/image/Comp 2_00005.png")));
+	private Icon homeEnter = new ImageIcon(GUI.class.getResource("/image/Comp 1_00008.png"));
+	private Icon homeExit = new ImageIcon(GUI.class.getResource("/image/Comp 1_00009.png"));
+	private JButton home = new JButton(new ImageIcon(GUI.class.getResource("/image/Comp 1_00009.png")));
+	private Icon trashEnter = new ImageIcon(GUI.class.getResource("/image/Comp 1_00006.png"));
+	private Icon trashExit = new ImageIcon(GUI.class.getResource("/image/Comp 1_00007.png"));
+	private JButton trash = new JButton(new ImageIcon(GUI.class.getResource("/image/Comp 1_00007.png")));
+	private Icon trash2Enter = new ImageIcon(GUI.class.getResource("/image/Comp 1_00006.png"));
+	private Icon trash2Exit = new ImageIcon(GUI.class.getResource("/image/Comp 1_00007.png"));
+	private JButton trash2 = new JButton(new ImageIcon(GUI.class.getResource("/image/Comp 1_00007.png")));
+	private Icon printEnter = new ImageIcon(GUI.class.getResource("/image/Comp 1_00004.png"));
+	private Icon printExit = new ImageIcon(GUI.class.getResource("/image/Comp 1_00005.png"));
+	private JButton print = new JButton(new ImageIcon(GUI.class.getResource("/image/Comp 1_00005.png")));
+	private Icon dupEnter = new ImageIcon(GUI.class.getResource("/image/Comp 2_00006.png"));
+	private Icon dupExit = new ImageIcon(GUI.class.getResource("/image/Comp 2_00007.png"));
+	private JButton dup = new JButton(new ImageIcon(GUI.class.getResource("/image/Comp 2_00007.png")));
+	private Icon moveEnter = new ImageIcon(GUI.class.getResource("/image/Comp 4_00000.png"));
+	private Icon moveExit = new ImageIcon(GUI.class.getResource("/image/Comp 4_00001.png"));
+	private JButton move = new JButton(new ImageIcon(GUI.class.getResource("/image/Comp 4_00001.png")));
+	private Icon home2Enter = new ImageIcon(GUI.class.getResource("/image/Comp 1_00008.png"));
+	private Icon home2Exit = new ImageIcon(GUI.class.getResource("/image/Comp 1_00009.png"));
+	private JButton home2 = new JButton(new ImageIcon(GUI.class.getResource("/image/Comp 1_00009.png")));
+	private ImageIcon icon = new ImageIcon(GUI.class.getResource("/image/Comp 5_00000.png"));
 	private ArrayList<List> listAry;
 	private ArrayList<Item> listAry2;
 	private DefaultTableModel model;
@@ -75,14 +78,12 @@ public class GUI extends JFrame {
 	public GUI() {
 	
 		setTitle("MyShoppingList");
+		setIconImage(icon.getImage());
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		setResizable(false);
 		setVisible(true);
 		setLocationRelativeTo(null);
 		setLayout(null);
-
-		//Container c = getContentPane();
-		//c.setLayout(null);
 		
 		Start st = new Start();
 
@@ -90,15 +91,11 @@ public class GUI extends JFrame {
 
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				FileIO fileIO = new FileIO();
-				try {
-					fileIO.Input("List.txt", listAry);
-				} catch (Exception E) {
-					JOptionPane.showMessageDialog(null, "Can't create files.");
-				}
+				SaveList saveList = new SaveList(listAry);
 				System.exit(0);
 			}
 		});
+		
 		//d1
 		AddListListener addListListener = new AddListListener();
 		addList.addMouseListener(addListListener);
@@ -129,13 +126,16 @@ public class GUI extends JFrame {
 		
 		DupListener dupListener = new DupListener();
 		dup.addMouseListener(dupListener);
+		
+		PrintListener printListener = new PrintListener();
+		print.addMouseListener(printListener);
 		//d3
 		Home2Listener home2Listener = new Home2Listener();
 		home2.addMouseListener(home2Listener);
 
 		d1(listAry);
 	}
-	
+
 	public void d1(ArrayList<List> listAry) {
 		setTitle("Main");
 		
@@ -149,8 +149,6 @@ public class GUI extends JFrame {
 
 		// Table
 		table = new JTable();
-		// table.setShowHorizontalLines(false);
-		// table.setShowVerticalLines(false);
 		table.setRowHeight(80);
 		scrollPane.setViewportView(table);
 		Font font = new Font("Godic", Font.BOLD, 20);
@@ -328,10 +326,19 @@ public class GUI extends JFrame {
 				b.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						boolean no = false;
 						String nameData = tf1.getText();
-						listAry.get(row + 2).name = nameData;
-						model.setValueAt("      " + listAry.get(row+2).name, row, 0);
-						f.setVisible(false);
+						for(int i = 0 ; i < listAry.size() ; i++) {
+							String preName = listAry.get(i).name;
+							if(nameData.equals(preName)) {
+								no = true;
+							}
+						}
+						if (no == false) {
+							listAry.get(row + 2).name = nameData;
+							model.setValueAt("      " + listAry.get(row+2).name, row, 0);
+							f.setVisible(false);
+						} else JOptionPane.showMessageDialog(null, "같은 이름의 리스트가 이미 존재합니다!");
 					}
 				});
 				b.setBounds(110,90,60,35);
@@ -483,7 +490,6 @@ public class GUI extends JFrame {
 					CheckBoxAry.add(i);
 			}
 			if(CheckBoxAry.size() > 0) {
-				System.out.println(CheckBoxAry.toString());
 				JFrame f = new JFrame();
 				f.setTitle("Delete List");
 				f.setSize(300, 190);
@@ -1058,10 +1064,42 @@ public class GUI extends JFrame {
 		
 	}
 	
+	private class PrintListener extends JFrame implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			SaveList saveList = new SaveList(listAry);
+			ArrayList<Item> ary = listAry.get(listIdx).ary;
+			try {
+				PrintToDesktop printToDesktop = new PrintToDesktop(ary, listAry.get(listIdx).name);
+				JOptionPane.showMessageDialog(null, "바탕화면에 txt파일을 생성하였습니다!");
+			} catch(Exception exception) {
+				JOptionPane.showMessageDialog(null, "오류 발생!");
+			}
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			print.setIcon(printEnter);
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			print.setIcon(printExit);
+		}
+		
+	}
+	
 	public void d3() {
 		setTitle("이전 등록 아이템");
 		
-		LoadPastItem load = new LoadPastItem();
+		LoadLastItem load = new LoadLastItem();
 		listAry2 = load.getList();
 		System.out.println(listAry2);
 		

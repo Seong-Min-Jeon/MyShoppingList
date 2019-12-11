@@ -11,7 +11,7 @@ public class Start {
 			ArrayList<List> ListAry = fileIO.OutputFinal("List.txt");
 			this.ListAry = ListAry;
 		} catch (Exception e) {
-			System.out.println(e);
+			System.err.println(e);
 		}
 	}
 	public ArrayList<List> getList(){
